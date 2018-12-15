@@ -43,14 +43,14 @@ tasks = [asyncio.ensure_future(setup_learner())]
 learn = loop.run_until_complete(asyncio.gather(*tasks))[0]
 loop.close()
 
-@app.route('/analyze', methods=['POST'])
+@app.route('/', methods=['POST'])
 async def analyze(request):
     data = await request.form()
 
     return JSONResponse({'result': textResponse(data)})
 
 def textResponse(data):
-    csv_string = learn.predict(data['file'], 25, temperature=0.5, min_p=0.001)
+    csv_string = learn.predict(data['text'], 25, temperature=0.5, min_p=0.001)
     time.sleep(2)
 
     words = csv_string.split()
