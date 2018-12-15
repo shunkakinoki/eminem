@@ -43,7 +43,7 @@ tasks = [asyncio.ensure_future(setup_learner())]
 learn = loop.run_until_complete(asyncio.gather(*tasks))[0]
 loop.close()
 
-@app.route('/', methods=['POST'])
+@app.route('/analyze', methods=['POST'])
 async def analyze(request):
     data = await request.form()
 
